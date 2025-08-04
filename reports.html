@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Library - Reports</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar (same as index.html) -->
+        <div class="w-64 bg-blue-800 text-white p-4 hidden md:block">
+            <!-- Same sidebar content as index.html -->
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Top Navigation (same as index.html) -->
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <!-- Same header content as index.html -->
+            </header>
+
+            <!-- Mobile Sidebar (same as index.html) -->
+            <div id="mobile-sidebar" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+                <!-- Same mobile sidebar content as index.html -->
+            </div>
+
+            <!-- Reports Content -->
+            <main class="p-6">
+                <h2 class="text-2xl font-bold mb-6">Library Reports</h2>
+                
+                <!-- Report Filters -->
+                <div class="bg-white rounded-lg shadow p-4 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div>
+                            <label class="block text-gray-700 mb-1">Report Type</label>
+                            <select id="report-type" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="books">Books Report</option>
+                                <option value="members">Members Report</option>
+                                <option value="transactions">Transactions Report</option>
+                                <option value="overdue">Overdue Books</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1">From Date</label>
+                            <input type="date" id="from-date" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-1">To Date</label>
+                            <input type="date" id="to-date" class="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div class="flex items-end">
+                            <button id="generate-report" class="w-full px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-bold mb-4">Books by Category</h3>
+                        <canvas id="books-by-category-chart" height="300"></canvas>
+                    </div>
+                    <div class="bg-white rounded-lg shadow p-6">
+                        <h3 class="text-lg font-bold mb-4">Monthly Transactions</h3>
+                        <canvas id="monthly-transactions-chart" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- Report Data -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold" id="report-title">Books Report</h3>
+                        <button id="export-report" class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700 flex items-center space-x-2">
+                            <i class="fas fa-file-export"></i>
+                            <span>Export</span>
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full" id="report-table">
+                            <thead class="bg-gray-50">
+                                <tr id="report-table-head">
+                                    <!-- Table headers will be loaded here by JavaScript -->
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="report-table-body">
+                                <!-- Report data will be loaded here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-gray-50 px-6 py-3 flex items-center justify-between border-t border-gray-200">
+                        <div class="text-sm text-gray-500">
+                            Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span id="total-items">50</span> items
+                        </div>
+                        <div class="flex space-x-2">
+                            <button id="prev-page" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 disabled:opacity-50">
+                                Previous
+                            </button>
+                            <button id="next-page" class="px-3 py-1 rounded border border-gray-300 bg-white text-gray-700 disabled:opacity-50">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
